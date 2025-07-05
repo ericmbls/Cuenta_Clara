@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Iniciar Sesión{% endblock %}
+
+{% block content %}
+  <div id="login-container" hx-get="{% url 'login' %}" hx-trigger="load"></div>
+{% endblock %}

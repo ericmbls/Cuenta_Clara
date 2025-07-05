@@ -1,0 +1,35 @@
+{% load static %}
+<div class="bg-white p-6 rounded shadow-md w-full max-w-sm">
+  <h2 class="text-xl font-bold mb-4 text-center">Iniciar sesión</h2>
+
+  <form method="POST" hx-post="{% url 'login' %}" hx-target="#login-container" hx-swap="innerHTML">
+    {% csrf_token %}
+    {% for field in form %}
+      <div class="mb-4">
+        {{ field.label_tag }} {{ field }}
+        {% if field.errors %}
+          <p class="text-sm text-red-500">{{ field.errors.0 }}</p>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+      <p class="text-sm text-red-500 mb-4">{{ form.non_field_errors.0 }}</p>
+    {% endif %}
+
+    <button class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" type="submit">
+      Entrar
+    </button>
+  </form>
+
+  <p class="text-sm mt-4 text-center">
+    ¿No tienes cuenta?
+    <a href="{% url 'register_page' %}" class="text-blue-500 hover:underline">Crear una</a>
+  </p>
+</div>
+
+<p class="mt-4 text-sm text-center text-gray-600">
+  <a href="{% url 'password_reset' %}" class="text-blue-600 hover:underline">
+    ¿Olvidaste tu contraseña?
+  </a>
+</p>
