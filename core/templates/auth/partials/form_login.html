@@ -1,0 +1,20 @@
+<form 
+  method="POST" 
+  hx-post="{% url 'login' %}" 
+  hx-target="#form-container" 
+  hx-swap="innerHTML" 
+  class="space-y-4 bg-white p-6 rounded-lg shadow-md"
+>
+  {% csrf_token %}
+  {{ form.email }}
+  {{ form.password }}
+  {% if form.non_field_errors %}
+    <div class="text-red-500 text-sm">{{ form.non_field_errors }}</div>
+  {% endif %}
+  <button 
+    type="submit" 
+    class="w-full bg-clara text-white py-2 rounded hover:bg-clara-dark transition"
+  >
+    Iniciar sesión
+  </button>
+</form>

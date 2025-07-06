@@ -1,22 +1,36 @@
 from pathlib import Path
+import os  # Por si necesitas usar os.path.join en algún momento
 
+# 📁 Ruta base del proyecto
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# 🔐 Clave secreta (¡no la subas a producción así!)
 SECRET_KEY = 'django-insecure-_e)u421oh-$z&=p)n647w!-3clj9l(3b921wf^jfbv*dbk*$*@'
+
+# 🐞 Modo debug solo para desarrollo
 DEBUG = True
+
+# 🌐 Hosts permitidos (vacío en desarrollo, pero obligatorio en producción)
 ALLOWED_HOSTS = []
 
+# 🧩 Aplicaciones instaladas
 INSTALLED_APPS = [
-    'django_extensions',
-    'widget_tweaks',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Apps de terceros
+    'django_extensions',
+    'widget_tweaks',
+
+    # Tu app
+    'core',
 ]
 
+# 🧱 Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -27,14 +41,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# 🌐 Configuración de URLs
 ROOT_URLCONF = 'cuenta_c.urls'
 
+# 🎨 Configuración de templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'templates',
-            BASE_DIR / 'usuarios' / 'templates',
+            BASE_DIR / 'core' / 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -48,8 +64,10 @@ TEMPLATES = [
     },
 ]
 
+# 🚀 WSGI
 WSGI_APPLICATION = 'cuenta_c.wsgi.application'
 
+# 🗃️ Base de datos
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -57,6 +75,7 @@ DATABASES = {
     }
 }
 
+# 🔐 Validadores de contraseña
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -64,20 +83,30 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+# 🌍 Internacionalización
 LANGUAGE_CODE = 'es-mx'
 TIME_ZONE = 'America/Mexico_City'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-STATIC_URL = 'static/'
+# 🖼️ Archivos estáticos
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-MEDIA_URL = 'media/'
+# 📸 Archivos multimedia
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
+# 📬 Email (solo consola en desarrollo)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'cffferic@gmail.com'
 
+# 🆔 Campo por defecto para modelos
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 🔐 Redirecciones de login/logout
+LOGIN_URL = '/auth/login/'
+LOGIN_REDIRECT_URL = '/auth/home/'
+LOGOUT_REDIRECT_URL = '/auth/login/'

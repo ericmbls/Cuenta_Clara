@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Inicio - Cuenta Clara{% endblock %}
+
+{% block content %}
+<div class="min-h-screen flex flex-col">
+  <header class="bg-white shadow-sm sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <img src="{% static 'favicon-32x32.png' %}" alt="Logo" class="w-8 h-8">
+        <span class="text-xl font-bold text-clara">CUENTA CLARA</span>
+      </div>
+      <nav class="hidden md:flex gap-6 text-sm text-gray-600">
+        <a href="#" class="hover:text-clara">Acerca de</a>
+        <a href="#" class="hover:text-clara">Soporte</a>
+        <a href="#" class="hover:text-clara">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="flex-1 flex flex-col items-center justify-center bg-gradient-to-b from-white via-gray-50 to-gray-100 px-4">
+    <div class="text-center max-w-xl space-y-6 py-10">
+      <h1 class="text-4xl md:text-5xl font-bold text-clara">Transparente. Sencillo. Para ti.</h1>
+      <p class="text-gray-600 text-lg">Gestiona tu dinero con claridad y confianza.</p>
+    </div>
+    <div 
+      hx-get="{% url 'auth_switcher' %}" 
+      hx-target="#auth-wrapper" 
+      hx-swap="innerHTML"
+      hx-trigger="load"
+    ></div>
+    <div id="auth-wrapper" class="w-full px-4 py-6"></div>
+  </main>
+
+  <footer class="text-center py-6 text-sm text-gray-500">
+    © 2025 Cuenta Clara · Tu dinero claro y seguro
+  </footer>
+</div>
+{% endblock %}

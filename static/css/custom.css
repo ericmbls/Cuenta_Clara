@@ -1,3 +1,42 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* custom.css - Estilos personalizados para Cuenta Clara */
+
+/* Colores principales */
+.text-clara {
+  color: #1e40af; /* Azul fuerte */
+}
+
+.bg-clara {
+  background-color: #1e40af;
+}
+
+.bg-clara-light {
+  background-color: #3b82f6;
+}
+
+.bg-clara-dark {
+  background-color: #1e3a8a;
+}
+
+/* Botones con sombra y transición suave */
+.btn {
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
+  font-weight: 500;
+}
+
+/* Encabezados con tipografía refinada */
+.heading-clara {
+  font-family: 'Segoe UI', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+/* Enlace con subrayado suave */
+.link-clara {
+  color: #1e40af;
+  text-decoration: none;
+}
+
+.link-clara:hover {
+  text-decoration: underline;
+  color: #1e3a8a;
+}

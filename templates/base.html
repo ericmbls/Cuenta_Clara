@@ -1,20 +1,68 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="es" class="h-full">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}Cuenta Clara{% endblock %}</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' %}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+
   <link href="{% static 'css/custom.css' %}" rel="stylesheet" />
   <script src="https://unpkg.com/htmx.org@1.9.9" defer></script>
 </head>
 <body class="bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen flex flex-col">
 
   {% include 'components/navbar.html' %}
-  
+
   <main class="flex-1 container mx-auto p-4">
     {% include 'components/alerts.html' %}
     {% block content %}{% endblock %}
   </main>
+
+  <script>
+    function showToast(message, tipo = 'info') {
+      const toast = document.createElement('div');
+      toast.className = `fixed bottom-6 right-6 px-4 py-2 rounded shadow-lg z-50 transition-opacity duration-300 ${
+        tipo === 'success' ? 'bg-green-500 text-white' :
+        tipo === 'error' ? 'bg-red-500 text-white' :
+        'bg-gray-800 text-white'
+      }`;
+      toast.textContent = message;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.classList.add('opacity-0'), 2500);
+      setTimeout(() => toast.remove(), 3000);
+    }
+  </script>
+
+  {% if request.COOKIES.toast_logout %}
+    <script>
+      showToast("Sesión cerrada correctamente 👋", "info");
+      document.cookie = "toast_logout=; Max-Age=0; path=/;";
+    </script>
+  {% endif %}
+  {% if request.COOKIES.toast_login %}
+    <script>
+      showToast("Bienvenido de nuevo 🎉", "success");
+      document.cookie = "toast_login=; Max-Age=0; path=/;";
+    </script>
+  {% endif %}
+  {% if request.COOKIES.toast_register %}
+    <script>
+      showToast("Cuenta creada con éxito 🎉", "success");
+      document.cookie = "toast_register=; Max-Age=0; path=/;";
+    </script>
+  {% endif %}
+  {% if request.COOKIES.toast_pwd_reset %}
+    <script>
+      showToast("Contraseña actualizada correctamente ✅", "success");
+      document.cookie = "toast_pwd_reset=; Max-Age=0; path=/;";
+    </script>
+  {% endif %}
 
 </body>
 </html>

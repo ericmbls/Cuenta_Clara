@@ -1,15 +1,17 @@
 {
   "name": "cuenta_c",
   "version": "1.0.0",
-  "description": "",
+  "description": "App web con Django, Tailwind CSS y HTMX",
   "main": "index.js",
   "scripts": {
-  "dev": "tailwindcss -i ./static/css/input.css -o ./static/css/custom.css --watch",
-  "test": "echo \"Error: no test specified\" && exit 1"
+  "dev": "node_modules/.bin/tailwindcss -i core/static/core/css/input.css -o static/css/custom.css --watch",
+  "build": "node_modules/.bin/tailwindcss -i core/static/core/css/input.css -o static/css/custom.css --minify"
 },
-  "author": "",
-  "license": "ISC",
+  "author": "Eric M.",
+  "license": "MIT",
   "devDependencies": {
-    "tailwindcss": "^4.1.11"
-  }
+  "tailwindcss": "^4.1.11",
+  "postcss": "^8.5.6",
+  "autoprefixer": "^10.4.21"
+}
 }

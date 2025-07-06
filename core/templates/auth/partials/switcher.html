@@ -1,0 +1,14 @@
+<script>
+  document.addEventListener('htmx:afterSwap', function(evt) {
+    if (evt.target.id === 'form-container') {
+      const btns = document.querySelectorAll('[hx-get]');
+      btns.forEach(btn => btn.setAttribute('aria-selected', 'false'));
+
+      if (evt.detail.xhr.responseURL.includes('login')) {
+        document.querySelector('.tab-login')?.setAttribute('aria-selected', 'true');
+      } else if (evt.detail.xhr.responseURL.includes('register')) {
+        document.querySelector('.tab-register')?.setAttribute('aria-selected', 'true');
+      }
+    }
+  });
+</script>

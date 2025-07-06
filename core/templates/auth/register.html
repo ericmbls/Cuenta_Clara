@@ -1,0 +1,47 @@
+<form 
+  method="POST"
+  hx-post="{% url 'register' %}"
+  hx-target="#register-container"
+  hx-swap="innerHTML"
+  class="space-y-4 bg-white p-6 rounded-lg shadow-md"
+>
+  {% csrf_token %}
+
+  <h2 class="text-2xl font-bold text-center text-clara mb-4">Crear cuenta</h2>
+
+  <div>
+    <label for="id_username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
+    {{ form.username|add_class:"w-full border-gray-300 rounded-md shadow-sm focus:ring-clara focus:border-clara" }}
+    {% if form.username.errors %}
+      <p class="text-sm text-red-600">{{ form.username.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <div>
+    <label for="id_password1" class="block text-sm font-medium text-gray-700">Contraseña</label>
+    {{ form.password1|add_class:"w-full border-gray-300 rounded-md shadow-sm focus:ring-clara focus:border-clara" }}
+    {% if form.password1.errors %}
+      <p class="text-sm text-red-600">{{ form.password1.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <div>
+    <label for="id_password2" class="block text-sm font-medium text-gray-700">Confirmar contraseña</label>
+    {{ form.password2|add_class:"w-full border-gray-300 rounded-md shadow-sm focus:ring-clara focus:border-clara" }}
+    {% if form.password2.errors %}
+      <p class="text-sm text-red-600">{{ form.password2.errors.0 }}</p>
+    {% endif %}
+  </div>
+
+  <button
+    type="submit"
+    class="w-full bg-clara text-white py-2 px-4 rounded-md hover:bg-clara-dark transition-colors"
+  >
+    Registrarse
+  </button>
+
+  <p class="mt-4 text-sm text-center text-gray-500">
+    ¿Ya tienes cuenta?
+    <a href="{% url 'login' %}" class="text-clara hover:underline">Inicia sesión aquí</a>
+  </p>
+</form>
